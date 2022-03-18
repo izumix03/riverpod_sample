@@ -16,45 +16,44 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends ConsumerWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  final int _counter = 0;
-
-  void _incrementCounter() {}
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    print("rebuild");
     return Scaffold(
-      appBar: AppBar(
-        title: Text(ref.read(titleProvider)),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        appBar: AppBar(
+          title: Consumer(
+              builder: (context, ref, child) => Text(ref.read(titleProvider))),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Consumer(
+                builder: (context, ref, child) =>
+                    Text(ref.read(messageProvider)),
+              ),
+              Consumer(
+                  builder: (context, ref, child) => Text(
+                        ref.watch(countProvider).toString(),
+                        style: Theme.of(context).textTheme.headline4,
+                      )),
+            ],
+          ),
+        ),
+        floatingActionButton: Consumer(
+          builder: (context, ref, child) => FloatingActionButton(
+            onPressed: () => ref.read(countProvider.state).state++,
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          ),
+        ));
   }
 }
