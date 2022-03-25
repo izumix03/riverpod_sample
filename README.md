@@ -16,4 +16,11 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 // https://github.com/sakushin-udemy/riverpod_countup
-https://www.udemy.com/course/riverpod/learn/lecture/28691114?start=0#content
+https://www.udemy.com/course/riverpod/learn/lecture/28691076#content
+
+
+```shell
+flutter pub run build_runner build
+or 
+// flutter pub run build_runner watch
+```
