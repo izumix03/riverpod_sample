@@ -24,3 +24,7 @@ flutter pub run build_runner build
 or 
 // flutter pub run build_runner watch
 ```
+
+```shell
+flutter test --update-goldens test/golden_test.dart
+```
