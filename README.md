@@ -28,3 +28,7 @@ or
 ```shell
 flutter test --update-goldens test/golden_test.dart
 ```
+
+```shell
+flutter pub pub run build_runner build
+```

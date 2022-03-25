@@ -4,8 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_sample/provider.dart';
 import 'package:riverpod_sample/view_model.dart';
 
-import 'data/count_data.dart';
-
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
