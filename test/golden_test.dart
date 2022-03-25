@@ -5,6 +5,7 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod_sample/main.dart';
+import 'package:riverpod_sample/provider.dart';
 import 'package:riverpod_sample/view_model.dart';
 
 import 'golden_test.mocks.dart';
@@ -49,5 +50,18 @@ void main() {
     verifyNever(mock.onIncrease());
     verifyNever(mock.onDecrease());
     verifyNever(mock.onReset());
+
+    // provider 書き換え,ちょっと上手くいってない
+    final mockTitleProvider = Provider<String>((ref) => 'mockMessage');
+    await tester.pumpWidgetBuilder(
+        ProviderScope(
+          overrides: [
+            titleProvider.overrideWithProvider(mockTitleProvider),
+            messageProvider.overrideWithValue('override with value')
+          ],
+          child: MyHomePage(mock),
+        )
+    );
+    await multiScreenGolden(tester, 'myHomePage_override', devices: devices);
   });
 }
