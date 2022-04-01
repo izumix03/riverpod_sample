@@ -1,6 +1,6 @@
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:riverpod_sample/login.dart';
+import 'package:riverpod_sample/logic/login.dart';
 
 void main() {
   Logic target = Logic();
